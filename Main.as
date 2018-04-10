@@ -7,14 +7,16 @@
 	import flash.events.MouseEvent;
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
-    import flash.events.Event;
+	import flash.events.Event;
+	import fl.transitions.easing.*;
+	import fl.transitions.Tween;
 	import flash.media.SoundChannel;
 	public class Main extends MovieClip {
-		var Nfigura:figuraI;
+		var Nfigura: figuraI;
 		public var c1: Sound = new Sound(new URLRequest("cancion1.mp3")); //Variable para saber donde se encuentra la canción 1
-		public var c2: Sound = new Sound(new URLRequest("cancionjuego.mp3"));//Variable para saber donde se encuentra la canción 2
+		public var c2: Sound = new Sound(new URLRequest("cancionjuego.mp3")); //Variable para saber donde se encuentra la canción 2
 		public function juego() { //Función del juego
-			c2.play(); 
+			c2.play();
 			l.visible = false;
 			L.visible = false;
 			S.visible = false;
@@ -106,149 +108,161 @@
 					seg = 0; //Vuelve a 0 los segundos
 				}
 			}
-			
-				var figuras: Number = Math.random() * 400;
-				var speed1: Number = 8;
-				 Nfigura= new figuraI();
-				addChild(Nfigura);
+
+			var figuras: Number = Math.random() * 400;
+			var speed1: Number = 8;
+			Nfigura = new figuraI();
+			addChild(Nfigura);
 			function abajo(event: Event): void {
-				Nfigura.x=174.7;
-				Nfigura.y +=5;
+				Nfigura.x = 174.7;
+				Nfigura.y += 5;
 			}
 			addEventListener(Event.ENTER_FRAME, abajo);
-			rojo.visible=false;
-			amarillo.visible=false;
-			rosa.visible=false;
-			gris.visible=false;
-			celeste.visible=false;
-			azul.visible=false;
-			verde.visible=false;
-			var fig:int=Math.random()*6;
+			rojo.visible = false;
+			amarillo.visible = false;
+			rosa.visible = false;
+			gris.visible = false;
+			celeste.visible = false;
+			azul.visible = false;
+			verde.visible = false;
+			var fig: int = Math.random() * 6;
 			function mostrarfig(event: Event): void {
-			if (fig == 0) {
-					if(rojo!=true){
-						rojo.visible=true;
-						rojo.x=174.7;
-					    rojo.y=37.5;
+				if (fig == 0) {
+					if (rojo != true) {
+						rojo.visible = true;
+						rojo.x = 174.7;
+						rojo.y = 37.5;
 					}
-					} else
-					if (fig == 1) {
-						if(amarillo!=true){
-						amarillo.visible=true;
-						amarillo.x=174.7;
-					    amarillo.y=37.5;
+				} else
+				if (fig == 1) {
+					if (amarillo != true) {
+						amarillo.visible = true;
+						amarillo.x = 174.7;
+						amarillo.y = 37.5;
 					}
-					} else
-					if (fig == 2) {
-							if(rosa!=true){
-						rosa.visible=true;
-						rosa.x=149.7;
-					    rosa.y=37.5;
+				} else
+				if (fig == 2) {
+					if (rosa != true) {
+						rosa.visible = true;
+						rosa.x = 149.7;
+						rosa.y = 37.5;
 					}
-					} else
-					if (fig == 3) {
-							if(gris!=true){
-						gris.visible=true;
-						gris.x=174.7;
-					    gris.y=37.5;
+				} else
+				if (fig == 3) {
+					if (gris != true) {
+						gris.visible = true;
+						gris.x = 174.7;
+						gris.y = 37.5;
 					}
-					} else
-					if (fig == 4) {
-						if(celeste!=true){
-						celeste.visible=true;
-						celeste.x=174.7;
-					    celeste.y=37.5;
+				} else
+				if (fig == 4) {
+					if (celeste != true) {
+						celeste.visible = true;
+						celeste.x = 174.7;
+						celeste.y = 37.5;
 					}
-					} else
-					if (fig == 5) {
-							if(azul!=true){
-						azul.visible=true;
-						azul.x=149.7;
-					    azul.y=37.5;
+				} else
+				if (fig == 5) {
+					if (azul != true) {
+						azul.visible = true;
+						azul.x = 149.7;
+						azul.y = 37.5;
 					}
-					} else
-					if (fig == 6) {
-							if(verde!=true){
-						verde.visible=true;
-						verde.x=174.7;
-					    verde.y=37.5;
-					}
+				} else
+				if (fig == 6) {
+					if (verde != true) {
+						verde.visible = true;
+						verde.x = 174.7;
+						verde.y = 37.5;
 					}
 				}
-				addEventListener(Event.ENTER_FRAME, mostrarfig);
-				function cubo1(event:Event){
-					cubo.y+=5;
-					if(cubo.y>566){
-						cubo.y=0;
-					}
-					if (Nfigura.visible != false) {
-					if (Nfigura.y >462) {
+			}
+			addEventListener(Event.ENTER_FRAME, mostrarfig);
+			function cubo1(event: Event) {
+				cubo.y += 5;
+				if (cubo.y > 566) {
+					cubo.y = 0;
+				}
+				if (Nfigura.visible != false) {
+					if (Nfigura.y > 462) {
 						addChild(Nfigura);
 						Nfigura.y = 37.5;
 						Nfigura.x = 299.7;
-					} 
+					}
 				}
-				}
-					addEventListener(Event.ENTER_FRAME,cubo1);
+			}
+			addEventListener(Event.ENTER_FRAME, cubo1);
 			function figurascai(event: Event): void {
-					if(rojo.visible!=false){
-						rojo.y++;
-						if(rojo.y>462){
-							rojo.visible=false
-							fig=Math.random()*6;
-						}
+				if (rojo.visible != false) {
+					rojo.y++;
+					if (rojo.y > 462) {
+						rojo.visible = false
+						fig = Math.random() * 6;
 					}
-					if(amarillo.visible!=false){
-						amarillo.y++;
-						if(amarillo.y>487){
-							amarillo.visible=false
-							fig=Math.random()*6;
-						}
+				}
+				if (amarillo.visible != false) {
+					amarillo.y++;
+					if (amarillo.y > 487) {
+						amarillo.visible = false
+						fig = Math.random() * 6;
 					}
-					if(rosa.visible!=false){
-						rosa.y++;
-						if(rosa.y>487){
-							rosa.visible=false
-							fig=Math.random()*6;
-						}
+				}
+				if (rosa.visible != false) {
+					rosa.y++;
+					if (rosa.y > 487) {
+						rosa.visible = false
+						fig = Math.random() * 6;
 					}
-					if(gris.visible!=false){
-						gris.y++;
-						if(gris.y>512){
-							gris.visible=false
-							fig=Math.random()*6;
-						}
+				}
+				if (gris.visible != false) {
+					gris.y++;
+					if (gris.y > 512) {
+						gris.visible = false
+						fig = Math.random() * 6;
 					}
-					if(celeste.visible!=false){
-						celeste.y++;
-						if(celeste.y>512){
-							celeste.visible=false
-							fig=Math.random()*6;
-						}
+				}
+				if (celeste.visible != false) {
+					celeste.y++;
+					if (celeste.y > 512) {
+						celeste.visible = false
+						fig = Math.random() * 6;
 					}
-					if(azul.visible!=false){
-						azul.y++;
-						if(azul.y>512){
-							azul.visible=false
-							fig=Math.random()*6;
-						}
+				}
+				if (azul.visible != false) {
+					azul.y++;
+					if (azul.y > 512) {
+						azul.visible = false
+						fig = Math.random() * 6;
 					}
-					if(verde.visible!=false){
-						verde.y++;
-						if(verde.y>512){
-							verde.visible=false
-							fig=Math.random()*6;
-						}
+				}
+				if (verde.visible != false) {
+					verde.y++;
+					if (verde.y > 512) {
+						verde.visible = false
+						fig = Math.random() * 6;
 					}
+				}
 			}
 			addEventListener(Event.ENTER_FRAME, figurascai);
 		}
 
 		public function portada() {
-			var channel: SoundChannel = c1.play(); //Comienza la primera canción
+			var cancionp: SoundChannel = c1.play(); //Comienza la primera canción
+			var poli: Tween = new Tween(poli, "y", Strong.easeOut, -50, 0, 3, true);
+			var siguiente: Tween = new Tween(siguiente, "y", Strong.easeOut, 700, 489.7, 3, true);
+			var mat: Tween = new Tween(mat, "x", Strong.easeOut, -500, 41, 3, true);
+			var mate: Tween = new Tween(mate, "x", Strong.easeOut, 900, 41, 3, true);
+			var mae: Tween = new Tween(mae, "x", Strong.easeOut, -500, 41, 3, true);
+			var nom: Tween = new Tween(nom, "x", Strong.easeOut, -500, 41, 3, true);
+			var maes: Tween = new Tween(maes, "x", Strong.easeOut, 900, 41, 3, true);
+			var matr: Tween = new Tween(matr, "x", Strong.easeOut, 900, 628.55, 3, true);
+			var nom1: Tween = new Tween(nom1, "x", Strong.easeOut, -500, 41, 3, true);
+			var nom2: Tween = new Tween(nom2, "x", Strong.easeOut, -500, 41, 3, true);
+			var mat1: Tween = new Tween(mat1, "x", Strong.easeOut, 900, 621.95, 3, true);
+			var mat2: Tween = new Tween(mat2, "x", Strong.easeOut, 900, 621.95, 3, true);
 			function siguiente1(event: MouseEvent) {
 				gotoAndStop(3); //Ir al fotograma 2
-				channel.stop();
+				cancionp.stop();
 			}
 			siguiente.addEventListener(MouseEvent.CLICK, siguiente1);
 
