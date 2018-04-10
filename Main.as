@@ -13,6 +13,13 @@
 	import flash.media.SoundChannel;
 	public class Main extends MovieClip {
 		public var dificult: int = 1;//Variable de dificultad del juego
+		public var figurel:Boolean=false;
+		public var figureL:Boolean=false;
+		public var figureS:Boolean=false;
+		public var figures:Boolean=false;
+		public var figureO:Boolean=false;
+		public var figureT:Boolean=false;
+		public var figureI:Boolean=false;
 		var Nfigura: figuraI;
 		public var c1: Sound = new Sound(new URLRequest("cancion1.mp3")); //Variable para saber donde se encuentra la canción 1
 		public var c2: Sound = new Sound(new URLRequest("cancionjuego.mp3")); //Variable para saber donde se encuentra la canción 2
@@ -40,6 +47,10 @@
 				}
 			}
 			atras.addEventListener(MouseEvent.CLICK, atras1);
+			function aceptar1(event:MouseEvent){
+				nextFrame();
+			}
+			aceptar.addEventListener(MouseEvent.CLICK,aceptar1);
 		}
 		public function juego() { //Función del juego
 			c2.play();
@@ -154,6 +165,7 @@
 			var fig: int = Math.random() * 6;
 			function mostrarfig(event: Event): void {
 				if (fig == 0) {
+					figurel=true;
 					if (rojo != true) {
 						rojo.visible = true;
 						rojo.x = 174.7;
@@ -161,6 +173,7 @@
 					}
 				} else
 				if (fig == 1) {
+					figureL=true;
 					if (amarillo != true) {
 						amarillo.visible = true;
 						amarillo.x = 174.7;
@@ -168,6 +181,7 @@
 					}
 				} else
 				if (fig == 2) {
+					figureI=true;
 					if (rosa != true) {
 						rosa.visible = true;
 						rosa.x = 149.7;
@@ -175,6 +189,7 @@
 					}
 				} else
 				if (fig == 3) {
+					figureT=true;
 					if (gris != true) {
 						gris.visible = true;
 						gris.x = 174.7;
@@ -182,6 +197,7 @@
 					}
 				} else
 				if (fig == 4) {
+						figureO=true;
 					if (celeste != true) {
 						celeste.visible = true;
 						celeste.x = 174.7;
@@ -189,6 +205,7 @@
 					}
 				} else
 				if (fig == 5) {
+						figureS=true;
 					if (azul != true) {
 						azul.visible = true;
 						azul.x = 149.7;
@@ -196,6 +213,7 @@
 					}
 				} else
 				if (fig == 6) {
+					figures=true;
 					if (verde != true) {
 						verde.visible = true;
 						verde.x = 174.7;
@@ -219,49 +237,49 @@
 			}
 			addEventListener(Event.ENTER_FRAME, cubo1);
 			function figurascai(event: Event): void {
-				if (rojo.visible != false) {
+				if (figurel==true) {
 					rojo.y++;
 					if (rojo.y > 462) {
 						rojo.visible = false
 						fig = Math.random() * 6;
 					}
 				}
-				if (amarillo.visible != false) {
+				if (figureL==true) {
 					amarillo.y++;
 					if (amarillo.y > 487) {
 						amarillo.visible = false
 						fig = Math.random() * 6;
 					}
 				}
-				if (rosa.visible != false) {
+				if (figureI==true) {
 					rosa.y++;
 					if (rosa.y > 487) {
 						rosa.visible = false
 						fig = Math.random() * 6;
 					}
 				}
-				if (gris.visible != false) {
+				if (figureT==true) {
 					gris.y++;
 					if (gris.y > 512) {
 						gris.visible = false
 						fig = Math.random() * 6;
 					}
 				}
-				if (celeste.visible != false) {
+				if (figureO==true) {
 					celeste.y++;
 					if (celeste.y > 512) {
 						celeste.visible = false
 						fig = Math.random() * 6;
 					}
 				}
-				if (azul.visible != false) {
+				if (figureS==true) {
 					azul.y++;
 					if (azul.y > 512) {
 						azul.visible = false
 						fig = Math.random() * 6;
 					}
 				}
-				if (verde.visible != false) {
+				if (figures==true) {
 					verde.y++;
 					if (verde.y > 512) {
 						verde.visible = false
@@ -270,7 +288,8 @@
 				}
 			}
 			addEventListener(Event.ENTER_FRAME, figurascai);
-		}
+			
+			}
 
 		public function portada() {
 			var cancionp: SoundChannel = c1.play(); //Comienza la primera canción
