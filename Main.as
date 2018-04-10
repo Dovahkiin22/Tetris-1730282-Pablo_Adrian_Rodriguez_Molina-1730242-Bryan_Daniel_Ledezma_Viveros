@@ -12,9 +12,35 @@
 	import fl.transitions.Tween;
 	import flash.media.SoundChannel;
 	public class Main extends MovieClip {
+		public var dificult: int = 1;//Variable de dificultad del juego
 		var Nfigura: figuraI;
 		public var c1: Sound = new Sound(new URLRequest("cancion1.mp3")); //Variable para saber donde se encuentra la canción 1
 		public var c2: Sound = new Sound(new URLRequest("cancionjuego.mp3")); //Variable para saber donde se encuentra la canción 2
+		public var s1: Sound = new Sound(new URLRequest("select.mp3"));//Variable para saber donde se encuentra sonido de selector
+		public var s2: Sound = new Sound(new URLRequest("limit.mp3"));//Variable para saber donde se encuentra sonido cuando llegas al limete
+		public function registro() {//Función del registro
+			num.text = "1";//Se muestra el uno como primera dificultad
+			function siguiente(event: MouseEvent) {//Función para aumentar de dificultad
+				if (dificult == 10) {//Si quieres aumentar más de 10 se reproduce un sonido diferente
+					s2.play();
+				} else {
+					s1.play();//Se reproduce un sonido para saber que aumento
+					dificult++;//Aumento de dificultad
+					num.text = dificult + "";//Se muestra la nueva dificultad
+				}
+			}
+			adelante.addEventListener(MouseEvent.CLICK, siguiente);//Función para disminuir de dificultad
+			function atras1(event: MouseEvent) {
+				if (dificult == 1) {//Si quieres disminuir menos de 1 se reproduce un sonido diferente
+					s2.play();
+				} else {
+					s1.play();//Se reproduce un sonido para saber que disminuyo
+					dificult--;//DIsminución de dificultad
+					num.text = dificult + "";//Se muestra la nueva dificultad
+				}
+			}
+			atras.addEventListener(MouseEvent.CLICK, atras1);
+		}
 		public function juego() { //Función del juego
 			c2.play();
 			l.visible = false;
@@ -249,7 +275,7 @@
 		public function portada() {
 			var cancionp: SoundChannel = c1.play(); //Comienza la primera canción
 			var poli: Tween = new Tween(poli, "y", Strong.easeOut, -50, 0, 3, true);
-			var siguiente: Tween = new Tween(siguiente, "y", Strong.easeOut, 700, 489.7, 3, true);
+			//var siguiente: Tween = new Tween(siguiente, "y", Strong.easeOut, 700, 489.7, 3, true);
 			var mat: Tween = new Tween(mat, "x", Strong.easeOut, -500, 41, 3, true);
 			var mate: Tween = new Tween(mate, "x", Strong.easeOut, 900, 41, 3, true);
 			var mae: Tween = new Tween(mae, "x", Strong.easeOut, -500, 41, 3, true);
@@ -261,11 +287,10 @@
 			var mat1: Tween = new Tween(mat1, "x", Strong.easeOut, 900, 621.95, 3, true);
 			var mat2: Tween = new Tween(mat2, "x", Strong.easeOut, 900, 621.95, 3, true);
 			function siguiente1(event: MouseEvent) {
-				gotoAndStop(3); //Ir al fotograma 2
+				gotoAndStop(2); //Ir al fotograma 2
 				cancionp.stop();
 			}
 			siguiente.addEventListener(MouseEvent.CLICK, siguiente1);
-
 		}
 	}
 }
